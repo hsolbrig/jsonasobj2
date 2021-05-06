@@ -1,0 +1,17 @@
+{
+  "a_string": "abc",
+  "a_int": -17153,
+  "a_float": 700.43,
+  "a_bool": true,
+  "a_list": [
+    1 , 2, 3
+  ],
+  "a_dict": {
+    "vals": [
+      1,
+      false,
+      -12.7,
+      "qwert"
+    ]
+  }
+}
