@@ -1,7 +1,7 @@
 import unittest
 from typing import Optional
 
-from jsonasobj import JsonObj, as_json
+from jsonasobj2 import JsonObj, as_json
 
 
 class MyObj(JsonObj):

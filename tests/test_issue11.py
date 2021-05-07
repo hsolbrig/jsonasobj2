@@ -5,8 +5,8 @@ from typing import Callable
 
 from dict_compare import dict_compare
 
-from jsonasobj import as_json_obj, as_dict, as_json, get, setdefault, JsonObj, keys, items, values
-from jsonasobj import loads as jso_loads, load as jso_load
+from jsonasobj2 import as_json_obj, as_dict, as_json, get, setdefault, JsonObj, keys, items, values
+from jsonasobj2 import loads as jso_loads, load as jso_load
 
 
 CWD = os.path.dirname(__file__)

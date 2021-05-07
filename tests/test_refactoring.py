@@ -1,7 +1,7 @@
 import unittest
 from dataclasses import dataclass
 
-from jsonasobj import JsonObj
+from jsonasobj2 import JsonObj
 
 
 class Root(JsonObj):

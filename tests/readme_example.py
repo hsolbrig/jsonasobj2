@@ -1,5 +1,5 @@
-import jsonasobj
-from jsonasobj._jsonobj import as_json, as_dict
+import jsonasobj2
+from jsonasobj2._jsonobj import as_json, as_dict
 
 test_json = """{
   "@context": {
@@ -21,7 +21,7 @@ test_json = """{
   ]
 }"""
 
-py_obj = jsonasobj.loads(test_json)
+py_obj = jsonasobj2.loads(test_json)
 py_obj.knows[0].extra = {'age': 17}
 py_obj.knows.append(dict(name='Barack Obama'))
 del py_obj.knows[0]['menu']

@@ -2,7 +2,7 @@ import unittest
 from copy import deepcopy
 from dataclasses import dataclass
 
-from jsonasobj import JsonObj
+from jsonasobj2 import JsonObj
 
 
 class YAMLRoot(JsonObj):

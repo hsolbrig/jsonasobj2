@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from jsonasobj import JsonObj, as_json
+from jsonasobj2 import JsonObj, as_json
 
 
 class ShapeAssociation(JsonObj):
@@ -31,7 +31,7 @@ expected = {
 
 class PositionalTestCase(unittest.TestCase):
     def test_positional(self):
-        """ jsonasobj has to support positional constructors """
+        """ jsonasobj2 has to support positional constructors """
         s = ShapeAssociation("http://example.org/people/42", 'http://example.org/model/Person', reason='cause')
         self.assertEqual(expected, json.loads(as_json(s)))
 

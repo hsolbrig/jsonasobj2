@@ -1,8 +1,8 @@
 import json
 import unittest
 
-import jsonasobj
-from jsonasobj import JsonObj
+import jsonasobj2
+from jsonasobj2 import JsonObj
 
 test_data = {
     "name": "Markus Lanthaler"
@@ -21,10 +21,10 @@ class NonDefaultTestCase(unittest.TestCase):
         # Failure point 1
         self.assertEqual('''{
    "name": "Markus Lanthaler"
-}''', jsonasobj.as_json(e))
+}''', jsonasobj2.as_json(e))
         self.assertEqual('''{
 yy"name": "Markus Lanthaler"
-}''', jsonasobj.as_json(e, indent='yy'))
+}''', jsonasobj2.as_json(e, indent='yy'))
         # Failure point 2
         self.assertEqual('''{
    "name": "Markus Lanthaler"

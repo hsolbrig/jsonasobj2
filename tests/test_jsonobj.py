@@ -2,8 +2,8 @@ import unittest
 import json
 from dict_compare import compare_dicts
 
-import jsonasobj
-from jsonasobj._jsonobj import as_json, as_dict
+import jsonasobj2
+from jsonasobj2._jsonobj import as_json, as_dict
 
 test_json = """{
   "@context": {
@@ -32,7 +32,7 @@ class BasicFunctionsTestCase(unittest.TestCase):
     def test_basic_json_read(self) -> None:
         """ Test the basic JSON level read
         """
-        py_obj = jsonasobj.loads(test_json)
+        py_obj = jsonasobj2.loads(test_json)
         self.assertEqual("Markus Lanthaler", py_obj.name)
         self.assertEqual("Dave Longley", py_obj.knows[0].name)
         self.assertEqual("http://xmlns.com/foaf/0.1/name", py_obj["@context"].name)
@@ -41,12 +41,12 @@ class BasicFunctionsTestCase(unittest.TestCase):
     def test_as_json(self):
         """ Test the JSON serialization
         """
-        py_obj = jsonasobj.loads(test_json)
+        py_obj = jsonasobj2.loads(test_json)
         self.assertEqual(json.loads(test_json), json.loads(py_obj._as_json))
         self.assertEqual(json.loads(test_json), json.loads(as_json(py_obj)))
 
     def test_setdefault(self):
-        py_obj = jsonasobj.JsonObj()
+        py_obj = jsonasobj2.JsonObj()
         py_obj._setdefault('test', dict(foo=17))
         py_obj._setdefault('test', 'nada')
         py_obj._setdefault('test2', 'sama')

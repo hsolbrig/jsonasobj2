@@ -1,6 +1,6 @@
 
 import unittest
-import jsonasobj
+import jsonasobj2
 
 test_json = """{
     "k1": 1,
@@ -15,7 +15,7 @@ test_json = """{
 
 class GetTestCase(unittest.TestCase):
     def test_get(self):
-        py_obj = jsonasobj.loads(test_json)
+        py_obj = jsonasobj2.loads(test_json)
         self.assertEqual(1, py_obj.k1)
         with self.assertRaises(AttributeError):
             py_obj.e1

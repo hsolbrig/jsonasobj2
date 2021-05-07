@@ -2,7 +2,7 @@ import json
 from typing import Union, List, Dict, Tuple, Optional, Callable, Any, Iterator
 from hbreader import hbread
 
-from jsonasobj.extendednamespace import ExtendedNamespace
+from jsonasobj2.extendednamespace import ExtendedNamespace
 
 # Possible types in the JsonObj representation
 JsonObjTypes = Union["JsonObj", List["JsonObjTypes"], str, bool, int, float, None]
@@ -92,7 +92,7 @@ class JsonObj(ExtendedNamespace):
     # JSON Serializer method
     # ===================================================
     @staticmethod
-    def _static_default(obj, filtr: Callable[[dict], dict] = lambda e: e):
+    def _static_default(obj, filtr: Callable[[Dict], Dict] = lambda e: e):
         """ return a serialized version of obj or raise a TypeError.  Used by the JSON serializer
 
         :param obj:
@@ -101,7 +101,7 @@ class JsonObj(ExtendedNamespace):
         """
         return filtr(obj._as_dict) if isinstance(obj, JsonObj) else json.JSONDecoder().decode(obj)
 
-    def _default(self, obj, filtr: Callable[[dict], dict] = lambda e: e):
+    def _default(self, obj, filtr: Callable[[Dict], Dict] = lambda e: e):
         """ This default method is here to allow inheriting classes to override it when needed """
         return JsonObj._static_default(obj, filtr)
 
@@ -176,7 +176,7 @@ class JsonObj(ExtendedNamespace):
         """
         return json.dumps(self, default=self._default)
 
-    def _as_json_dumps(self, indent: str = '   ', filtr: Callable[[dict], dict] = None, **kwargs) -> str:
+    def _as_json_dumps(self, indent: str = '   ', filtr: Callable[[Dict], Dict] = None, **kwargs) -> str:
         """ Convert to a stringified json object.
 
         This is the same as _as_json with the exception that it isn't
@@ -223,20 +223,37 @@ def load(source, **kwargs) -> JsonObj:
     return loads(hbread(source, accept_header="application/json, text/json;q=0.9"), **kwargs)
 
 
+def is_dict(obj: Union[JsonObj, Any]) -> bool:
+    """
+    Determine whether obj is a dictionary or a JsonObj containing a dictionary
+    """
+    return isinstance(obj, dict) or (isinstance(obj, JsonObj) and not isinstance(obj._hide_list(), list))
+
+
+def is_list(obj: Union[JsonObj, Any]) -> bool:
+    """
+    Determine whether obj is a dictionary or a JsonObj containing a dictionary
+    """
+    return isinstance(obj, list) or (isinstance(obj, JsonObj) and isinstance(obj._hide_list(), list))
+
+
 def as_dict(obj: Union[JsonObj, List]) -> Union[List, Dict[str, JsonTypes]]:
     """ Convert a JsonObj into a straight dictionary or list
 
     :param obj: pseudo 'self'
     :return: dictionary that cooresponds to the json object
     """
-    return [as_dict(e) for e in obj] if isinstance(obj, list) else\
-           {k: as_dict(v) for k, v in items(obj)} if isinstance(obj, JsonObj) else \
-           obj if isinstance(obj, dict) else \
-           obj
-
+    if isinstance(obj, (list, JsonObj)):
+        return \
+            {k: as_dict(v) if isinstance(v, (list, dict, JsonObj)) else v
+             for k, v in items(obj)} if is_dict(obj) else \
+            [as_dict(e) if isinstance(e, (list, dict, JsonObj)) else
+             e for e in (obj._hide_list() if isinstance(obj, JsonObj) else obj)]
+    else:
+        return obj
 
 def as_json(obj: Union[Dict, JsonObj, List], indent: Optional[str] = '   ',
-            filtr: Callable[[dict], dict] = None, **kwargs) -> str:
+            filtr: Callable[[Dict], Dict] = None, **kwargs) -> str:
     """ Convert obj to json string representation.
 
         :param obj: pseudo 'self'

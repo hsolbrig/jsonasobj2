@@ -1,6 +1,6 @@
 
 import unittest
-import jsonasobj
+import jsonasobj2
 
 test_json = """{
     "k1": 1,
@@ -14,7 +14,7 @@ test_json = """{
 
 class ItemsTestCase(unittest.TestCase):
     def test_items(self):
-        py_obj = jsonasobj.loads(test_json)
+        py_obj = jsonasobj2.loads(test_json)
         for k, v in py_obj._items():
             if k == 'k1':
                 self.assertEqual(1, v)
@@ -22,7 +22,7 @@ class ItemsTestCase(unittest.TestCase):
                 self.assertEqual("abc", v)
             else:
                 self.assertEqual(k, "k3")
-                self.assertTrue(isinstance(v, jsonasobj.JsonObj))
+                self.assertTrue(isinstance(v, jsonasobj2.JsonObj))
                 self.assertEqual("foo", v.x1)
                 self.assertEqual(17, v.x2)
 

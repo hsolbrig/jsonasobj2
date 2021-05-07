@@ -1,6 +1,6 @@
 import unittest
 
-from jsonasobj import JsonObj, as_json, as_dict
+from jsonasobj2 import JsonObj, as_json, as_dict
 
 indict = {
     "a": "a",

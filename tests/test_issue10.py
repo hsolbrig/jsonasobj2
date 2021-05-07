@@ -1,10 +1,11 @@
 import unittest
 
+import jsonasobj
 from pyjsg.jsglib import JSGObjectMap, JSGString, JSGPattern, ArrayFactory, JSGContext, Integer
 from pyjsg.validate_json import JSGPython
 
 from json import loads as jsonloads
-from jsonasobj import as_json
+from jsonasobj2 import as_json
 
 # Taken from
 class HEX(JSGString):
@@ -41,7 +42,7 @@ obj {a: . , }''')
         self.assertTrue(rslt.success)
 
     def test_basic_map(self):
-        """ Test sometimes failing pyjsg use case for jsonasobj """
+        """ Test sometimes failing pyjsg use case for jsonasobj2 """
         # From: https://github.com/hsolbrig/pyjsg/blob/master/tests/test_jsglib/test_objectmap.py#L15
         class IntObjectMap(JSGObjectMap):
             _name_filter = HEX
@@ -54,4 +55,4 @@ obj {a: . , }''')
         x = IntObjectMap()
         x.E = [1,2,3]
         self.assertTrue(x._is_valid())
-        self.assertEqual(as_json(x), as_json(jsonloads('{"E":[1,2,3]}')))
+        self.assertEqual(jsonasobj.as_json(x), as_json(jsonloads('{"E":[1,2,3]}')))

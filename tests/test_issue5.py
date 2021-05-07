@@ -1,6 +1,6 @@
 import unittest
 
-import jsonasobj
+import jsonasobj2
 
 test_data = {
     "@context": {
@@ -37,7 +37,7 @@ expected='''{
 
 class MissingObjectTestCase(unittest.TestCase):
     def test_missing(self):
-        pyobj = jsonasobj.loads(test_json)
+        pyobj = jsonasobj2.loads(test_json)
         self.assertEqual('Markus Lanthaler', pyobj.name)
         self.assertEqual(pyobj.name, pyobj['name'])
         with self.assertRaises(AttributeError) as e:

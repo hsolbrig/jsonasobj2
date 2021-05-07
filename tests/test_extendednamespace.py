@@ -1,6 +1,6 @@
 
 import unittest
-import jsonasobj
+import jsonasobj2
 
 
 class ExtendedNamespaceTestCase(unittest.TestCase):
@@ -9,7 +9,7 @@ class ExtendedNamespaceTestCase(unittest.TestCase):
     """
     def test_extendednamespace(self) -> None:
         # Direct constructor
-        ens = jsonasobj.ExtendedNamespace(i1=1, i2='a', i3='17')
+        ens = jsonasobj2.ExtendedNamespace(i1=1, i2='a', i3='17')
         # Test dictionary and namespace behavior
         self.assertEqual(1, ens.i1)
         self.assertEqual('a', ens.i2)
@@ -25,14 +25,14 @@ class ExtendedNamespaceTestCase(unittest.TestCase):
         self.assertEqual(243, ens['i4'])
 
         # Construct from a dictionary, using common json-ld idioms
-        ens1 = jsonasobj.ExtendedNamespace(**{'i1': 1, '@foo': "bar", 'x:y': ens})
+        ens1 = jsonasobj2.ExtendedNamespace(**{'i1': 1, '@foo': "bar", 'x:y': ens})
         self.assertEqual(1, ens1.i1)
         self.assertEqual('bar', ens1['@foo'])
         self.assertEqual(ens, ens1['x:y'])
         self.assertEqual(3, len(ens1))
 
     def test_extended_access(self) -> None:
-        ens = jsonasobj.ExtendedNamespace(i1=1, i2='a', i3='17')
+        ens = jsonasobj2.ExtendedNamespace(i1=1, i2='a', i3='17')
         self.assertEqual("no", ens._get('i4', 'no'))
 
 

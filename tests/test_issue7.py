@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from jsonasobj import JsonObj, loads, as_json, as_json_obj, as_dict
+from jsonasobj2 import JsonObj, loads, as_json, as_json_obj, as_dict
 
 s_list = '''[
    {

@@ -1,6 +1,6 @@
 import unittest
 
-import jsonasobj
+import jsonasobj2
 
 
 test_data = {
@@ -43,8 +43,8 @@ class FilterTestCase(unittest.TestCase):
         return {k: v for k, v in e.items() if not k.startswith('@')}
 
     def test_filters(self):
-        pyobj = jsonasobj.loads(test_json)
-        self.assertEqual(expected, jsonasobj.as_json(pyobj, filtr=self.filtr))
+        pyobj = jsonasobj2.loads(test_json)
+        self.assertEqual(expected, jsonasobj2.as_json(pyobj, filtr=self.filtr))
         self.assertEqual(expected, pyobj._as_json_dumps(filtr=self.filtr))
 
 

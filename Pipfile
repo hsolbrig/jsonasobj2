@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 hbreader = "*"
+jsonasobj2 = {path = "."}
 
 [dev-packages]
 yadict-compare = "*"
