@@ -1,6 +1,12 @@
 CHANGES
 =======
 
+v1.0.1
+------
+
+* Switch base directory to jsonobj2
+* First push to pypi
+
 v1.0.0
 ------
 
