@@ -80,7 +80,7 @@ class JsonObj(ExtendedNamespace):
         """ Construct a JsonObj from a dictionary or another JsonObj """
         if not isinstance(d, JsonObj):
             ExtendedNamespace.__init__(self, _if_missing=self._if_missing,
-                                       **{k: JsonObj(v) if isinstance(v, dict) else v for k, v in d.items()})
+                                       **{str(k): JsonObj(v) if isinstance(v, dict) else v for k, v in d.items()})
 
     def _hide_list(self):
         return self._root if '_root' in self else self
